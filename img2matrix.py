@@ -10,7 +10,7 @@ def main():
     outer = scale_image(outer, scale_factor)
     matrix_inner, matrix_outer = byte_stream(inner, outer)
 
-    matrix_outer = remove_data_points(matrix_outer, 0.5)
+    matrix_outer = remove_data_points(matrix_outer, 0.8)
     #matrix_inner = remove_data_points(matrix_inner, 0.5)
 
     matrix = matrix_inner + matrix_outer

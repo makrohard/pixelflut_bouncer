@@ -12,11 +12,10 @@ def main():
     half_x = int(width/2)
     half_y = int(height/2)
     offset = (half_x, res_y / 2)
-    #offset = (1,1)
     direction_x = 1
     direction_y = 1
-    step = 1
-    redraw_times = 30
+    step = 10
+    redraw_times = 10
 
     commands = create_commands(color)
 
@@ -30,11 +29,10 @@ def main():
         offset_command = (f'OFFSET %i %i\n' % (offset[0], offset[1])).encode('utf-8')
         command = offset_command + commands
 
-        print(offset_command)
+        print(offset)
+
         for i in range(redraw_times):
             sock.sendall(command)
-
-
     sock.close()
 
 def new_offset(offset, half_x, half_y, direction_x, direction_y, res_x, res_y, step):
@@ -59,13 +57,8 @@ def create_commands(color):
     commands = []
     for x, y in matrix:
         commands.append(f'PX {x} {y} {color}')
-
     commands_string = '\n'.join(commands).encode('utf-8')
-    #commands_string = b''.join(len(command).to_bytes(2, 'big') + command.encode('utf-8') for command in commands)
-
-    #print(commands_string)
     return commands_string
-
 
 if __name__ == "__main__":
     main()
