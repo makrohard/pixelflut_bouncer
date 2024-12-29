@@ -5,7 +5,7 @@ def main():
     outer =  Image.open('img/ring.png')
     inner =  Image.open('img/8.png')
 
-    scale_factor = 1
+    scale_factor = 0.3
     inner = scale_image(inner, scale_factor)
     outer = scale_image(outer, scale_factor)
     matrix_inner, matrix_outer = byte_stream(inner, outer)
