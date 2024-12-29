@@ -54,6 +54,5 @@ def create_commands(color):
     commands_string = '\n'.join(commands).encode('utf-8')
     return commands_string
 
-
 if __name__ == "__main__":
     main()
