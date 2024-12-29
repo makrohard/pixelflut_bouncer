@@ -22,7 +22,7 @@ def main():
 
     # combine inner and outer image
     matrix = matrix_inner + matrix_outer
-    matrix2image(matrix)
+    #matrix2image(matrix)
     return matrix
 
 # use scaled image to create pixelmatrix
