@@ -7,7 +7,6 @@ def main():
     port = 1337
     res_x = 3840
     res_y = 1080
-    color = 'FF0000'
     width, height = get_dimensions()
     half_x = int(width/2)
     half_y = int(height/2)
@@ -17,7 +16,7 @@ def main():
     step = 10
     redraw_times = 10
 
-    commands = create_commands(color)
+    commands = create_commands()
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     print(f'Connecting to %s:%s ...' % (server, port))
@@ -48,14 +47,15 @@ def new_offset(offset, half_x, half_y, direction_x, direction_y, res_x, res_y, s
         return (int(offset[0] + step * direction_x),int(offset[1] + step * direction_y)), direction_x, direction_y
 
 def get_dimensions():
-    width = (max(x for x, y in matrix))+1
-    height = (max(y for x, y in matrix))+1
+    width = max(pixel[0] for pixel in matrix)
+    height= max(pixel[1] for pixel in matrix)
     return width, height
 
 
-def create_commands(color):
+def create_commands():
     commands = []
-    for x, y in matrix:
+    for x, y, color in matrix:
+        print(color)
         commands.append(f'PX {x} {y} {color}')
     commands_string = '\n'.join(commands).encode('utf-8')
     return commands_string
