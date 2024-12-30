@@ -1,28 +1,31 @@
 from PIL import Image, ImageDraw
 from io import BytesIO
 
+# uses two black + transparent images.
+# returns matrix of black pixels
+
 def main():
     # open images
-    outer =  Image.open('img/ring.png')
-    inner =  Image.open('img/8.png')
+    outer =  Image.open('img/O.png')
+    inner =  Image.open('img/A.png')
 
     # scale images
-    scale_factor = 0.3
+    scale_factor = 0.5
     inner = scale_image(inner, scale_factor)
     outer = scale_image(outer, scale_factor)
 
     # create matrix of full black pixels
-    color_inner = 'FF0000'
-    color_outer = 'FFFFFF'
+    color_inner = 'FFFFFF'
+    color_outer = 'FF0000'
     matrix_inner, matrix_outer = byte_stream(inner, outer, color_inner, color_outer)
 
     # remove every nth pixel
-    matrix_outer = remove_data_points(matrix_outer, 0.8)
-    #matrix_inner = remove_data_points(matrix_inner, 0.5)
+    matrix_outer = remove_data_points(matrix_outer, 0.3)
+    matrix_inner = remove_data_points(matrix_inner, 0.3)
 
     # combine inner and outer image
     matrix = matrix_inner + matrix_outer
-    #matrix2image(matrix)
+    matrix2image(matrix)
     return matrix
 
 # use scaled image to create pixelmatrix
